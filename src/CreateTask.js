@@ -1,27 +1,31 @@
 import React, { useState } from "react";
-import { v4 as uuid } from "uuid";
+import { v4 as uuidv4 } from "uuid";
 
 const CreateTask = ({ addTask }) => {
   const [title, setTitle] = useState("");
   const [eta, setEta] = useState("");
   const [status, setStatus] = useState("Pending");
+  const [id, setId] = useState(1);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const task = {
-      id: uuid(),
-      title,
-      eta,
-      status,
+    const newTask = {
+      id: id,
+      title: title,
+      eta: eta,
+      status: status,
+      auditTrail: [{ status: status, eta: eta, timeStamp: Date.now() }],
     };
-    addTask(task);
+    addTask(newTask);
     setTitle("");
     setEta("");
     setStatus("Pending");
+    setId(id + 1);
   };
 
   return (
     <div>
+      <h2>Create Task</h2>
       <form onSubmit={handleSubmit}>
         <label>
           Title:
@@ -46,12 +50,12 @@ const CreateTask = ({ addTask }) => {
             <option value="InProgress">InProgress</option>
             <option value="InReview">InReview</option>
             <option value="Complete">Complete</option>
-</select>
-</label>
-<button type="submit">Create Task</button>
-</form>
-</div>
-);
+          </select>
+        </label>
+        <button type="submit">Create Task</button>
+      </form>
+    </div>
+  );
 };
 
 export default CreateTask;
