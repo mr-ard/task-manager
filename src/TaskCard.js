@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./TaskCard.css";
 
 const TaskCard = ({ task, updateTask }) => {
   const [editing, setEditing] = useState(false);
@@ -42,7 +43,7 @@ const TaskCard = ({ task, updateTask }) => {
   };
 
   return (
-    <div>
+    <div className="task-card">
       <div>
         <p>ID: {task.id}</p>
         <p>Title: {task.title}</p>

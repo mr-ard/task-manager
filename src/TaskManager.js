@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import TaskList from "./TaskList";
 import CreateTask from "./CreateTask";
+import "./TaskManager.css"; // <-- Import the CSS file
 
 const TaskManager = () => {
   const [tasks, setTasks] = useState([]);
@@ -36,7 +37,8 @@ const TaskManager = () => {
   };
 
   return (
-    <div>
+    <div className="task-manager-container">
+      <h1 className="task-manager-header">Task Manager</h1>
       <CreateTask addTask={addTask} />
       <TaskList tasks={tasks} updateTask={updateTask} getTaskById={getTaskById} />
     </div>
